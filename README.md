@@ -123,15 +123,12 @@
 id указывается автоматически с помощью SERIAL
 ---
 
-## ER-diagram
-
 ## ERD и структура проекта
 
 ERD построена по PostgreSQL, внешние ключи прописаны через `REFERENCES brands(id)`.
 
 Проект имеет следующую структуру:
 
-/Cosmetics
 1. create_tables.sql          # Скрипт создания таблиц
 2. data_for_cosmetics_bd.sql  # Скрипт вставки данных
 3. scheme_cosmetics_bd_1.png  # ERD (графическое изображение)
