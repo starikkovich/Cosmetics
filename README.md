@@ -125,26 +125,16 @@ id указывается автоматически с помощью SERIAL
 
 ## ER-diagram
 
-┌─────────────────┐          ┌──────────────────┐
-│   brands        │          │   products       │
-├─────────────────┤          ├──────────────────┤
-│ id (PK)         │◄─────────│ brand_id (FK)    │
-│ brand_name      │          │ id (PK)          │
-│ country         │          │ product_name     │
-│ foundation_year │          │ category         │
-│ website         │          │ price            │
-│ description     │          │ manufacture_date │
-└─────────────────┘          │ quantity         │
-                             │ description      │
-                             └──────────────────┘
+## ERD и структура проекта
 
-ERD построена по PostgreSQL и FK прописан через REFERENCES brands(id)
- 
+ERD построена по PostgreSQL, внешние ключи прописаны через `REFERENCES brands(id)`.
+
+Проект имеет следующую структуру:
+
 /Cosmetics
-│
-├── create_tables.sql         # Создание таблиц
-├── data_for_cosmetics_bd.sql # Вставка данных
-├── scheme_cosmetics_db       # ERD
-├── README.md                 # Описание базы, справочников и ERD
-└── main.py                   # Код приложения
+1. create_tables.sql          # Скрипт создания таблиц
+2. data_for_cosmetics_bd.sql  # Скрипт вставки данных
+3. scheme_cosmetics_bd_1.png  # ERD (графическое изображение)
+4. README.md                  # Описание базы, справочников и ERD
+5. main.py                    # Код приложения (если есть)
 
