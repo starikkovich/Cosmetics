@@ -61,3 +61,90 @@
 
 - Дата:
   - дата производства товара
+
+## Название базы данных
+**cosmetics_bd**
+
+---
+
+## Скрипт для базы данных
+Файл `create_tables.sql` создаёт таблицы:
+
+1. **brands** — хранит информацию о брендах косметики  
+2. **products** — хранит информацию о косметических товарах  
+
+### Структура таблиц
+
+#### Таблица `brands`
+
+| Поле            | Тип данных      | Описание                             |
+|-----------------|-----------------|--------------------------------------|
+| id              | SERIAL          | Уникальный идентификатор бренда (PK) |
+| brand_name      | VARCHAR(100)    | Название бренда                      |
+| country         | VARCHAR(50)     | Страна бренда                        |
+| foundation_year | INT             | Год основания                        |
+| website         | VARCHAR(100)    | Сайт бренда                          |
+| description     | TEXT            | Описание бренда (многострочно)       |
+
+#### Таблица `products`
+
+| Поле             | Тип данных       | Описание                            |
+|------------------|----------------|---------------------------------------|
+| id               | SERIAL          | Уникальный идентификатор товара (PK) |
+| product_name     | VARCHAR(100)    | Название товара                      |
+| brand_id         | INT             | Ссылка на бренд (FK → brands.id)     |
+| category         | VARCHAR(50)     | Категория товара                     |
+| price            | NUMERIC(10,2)   | Цена товара                          |
+| manufacture_date | DATE            | Дата производства                    |
+| quantity         | INT             | Количество товара                    |
+| description      | TEXT            | Описание товара (многострочно)       |
+
+---
+
+## Скрипт для вставки данных в базу данных
+Файл `data_for_cosmetics_bd.sql` вставляет примерные данные:
+
+### Таблица `brands`
+
+| id | brand_name   | country  | foundation_year | website          | description                       |
+|----|--------------|----------|-----------------|------------------|--------------------------------   |
+| 1  | L'Oreal      | France   | 1909            | loreal.com       | Один из крупнейших брендов        |
+| 2  | Maybelline   | USA      | 1915            | maybelline.com   | Популярная марка косметики        |
+| 3  | Faberlic     | Russia   | 1997            | faberlic.com     | Российская косметическая компания |
+
+### Таблица `products`
+
+| id | product_name     | brand_id | category   | price  | manufacture_date | quantity | description                  |
+|----|------------------|----------|------------|--------|------------------|----------|------------------------------|
+| 1  | Matte Lipstick   | 2        | Помада     | 12.50  | 2026-01-10       | 100      | Матовая губная помада        |
+| 2  | Anti-Age Cream   | 1        | Крем       | 45.99  | 2025-12-05       | 50       | Крем против старения кожи    |
+| 3  | Perfume "Rose"   | 3        | Духи       | 25.00  | 2026-02-15       | 30       | Цветочные духи               |
+
+id указывается автоматически с помощью SERIAL
+---
+
+## ER-diagram
+
+┌─────────────────┐          ┌──────────────────┐
+│   brands        │          │   products       │
+├─────────────────┤          ├──────────────────┤
+│ id (PK)         │◄─────────│ brand_id (FK)    │
+│ brand_name      │          │ id (PK)          │
+│ country         │          │ product_name     │
+│ foundation_year │          │ category         │
+│ website         │          │ price            │
+│ description     │          │ manufacture_date │
+└─────────────────┘          │ quantity         │
+                             │ description      │
+                             └──────────────────┘
+
+ERD построена по PostgreSQL и FK прописан через REFERENCES brands(id)
+ 
+/Cosmetics
+│
+├── create_tables.sql         # Создание таблиц
+├── data_for_cosmetics_bd.sql # Вставка данных
+├── scheme_cosmetics_db       # ERD
+├── README.md                 # Описание базы, справочников и ERD
+└── main.py                   # Код приложения
+
